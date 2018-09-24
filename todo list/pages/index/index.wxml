@@ -1,0 +1,27 @@
+<!--pages/index/index.wxml-->
+
+<van-notify id="custom-selector" />
+<view class='today'>{{time}}</view>
+<view class='now-task'>当前任务({{unNum}})</view>
+<view wx:if='{{unNum}}'>
+  <van-cell-group>
+    <navigator wx:for='{{app.globalData.dataList}}' wx:for-item="data" wx:key="name"  wx:if="{data.situation==1}}" url="../infor/infor?key={{data.Name}}">{{data.Name}}
+    </navigator>
+  </van-cell-group>
+</view>
+<view class='no-task' wx:else>空空如也</view>
+<view class='show-btn' hover-class='show-btn-hover' bindtap='btn'>{{isShowHistory ? "隐藏历史任务" : "显示历史任务"}}</view>
+<view wx:if="{{isShowHistory}}">
+  <van-cell-group>
+    <view wx:for="{{app.globalData.dataList}}">
+      <view wx:if="{{data.situation==0}}">
+        <navigator url="../infor/infor?key={{data.Name}}">
+          <van-cell icon="passed" title="{{data.Name}}" is-link />
+        </navigator>
+      </view>
+    </view>
+  </van-cell-group>
+</view>
+<navigator url='/pages/add/add'>
+  <image class='add-img' src='../images/add.png'></image>
+</navigator>

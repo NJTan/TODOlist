@@ -1,0 +1,28 @@
+<!--pages/add/add.wxml-->
+<view class='now-task'>新建任务</view>
+<van-cell-group>
+  <van-field
+    value="{{ name}}"
+    label="任务名称"
+    placeholder=""
+    bind:input="getName"
+    required="{{ true }}"
+    error
+  />
+  <van-field
+    value="{{infor }}"
+    label="任务内容"
+    type="textarea"
+    placeholder=""
+    bind:input="getInfor"
+    autosize
+    border="{{ false }}"
+  />
+</van-cell-group>
+<view class='now-task'>选填任务标签</view>
+<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+  <van-cell-group>
+    <van-cell title="选择任务标签" is-link arrow-direction="down" />
+  </van-cell-group>
+</picker>
+<view class='sure-btn' bindtap='addTask'>确认创建任务</view>
