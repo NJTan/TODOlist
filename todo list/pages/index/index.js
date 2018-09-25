@@ -1,32 +1,54 @@
-const app = getApp()
+const app = getApp();
+var keyname = null;
 var util = require('../../utils/util.js');
-
 Page({
   data: {
-    unNum: 0,
-    isShowHistory: 0,
+    ShowView: false,
+    dataList:{},
+    keyname:null,
   },
-  onLoad: function () {
+  onLoad: function (option) {
+    
     var time = util.formatTime(new Date());
+    this.data.dataList = app.globalData.dataList; 
     this.setData({
       time: time
     })
-    console.log(this.data.dataList)
-    var unNum=0
-    for (var i in app.globalData.dataList){
-      var situ = this.data.dataList[i].situation
-      if( situ == 1){
-        unNum++
+  },
+  onShow:function(){
+    var unNum = 0;
+    var keyname=[]; 
+    for (var i in app.globalData.dataList) {
+      var si = app.globalData.dataList[i].situation;
+      if (si) {
+        unNum++;
+
       }
     }
+    this.data.dataList=app.globalData.dataList;
+    var keyname=this.data.dataList.keyname;
     this.setData({
-      unNum:this.data.unNum
+      unNum:unNum,
+      dataList:this.data.dataList,
+      keyname:this.data.keyname,
+    })
+    console.log(app.globalData.dataList)
+    console.log(this.data.dataList);
+    console.log(this.data.keyname);
+  },
+  onHide: function () {
+    wx.setStorage({
+      key: 'key',
+      data: getApp().globalData.datalist,
+      success: function (res) {
+        console.log(getApp().globalData.datalist)
+      }
     })
   },
   btn: function () {
     var that = this;
     that.setData({
-      isShowHistory: (!that.data.isShowHistory)
+      ShowView:(!that.data.ShowView)
     })
   }
 })

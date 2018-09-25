@@ -4,24 +4,33 @@
 <view class='today'>{{time}}</view>
 <view class='now-task'>当前任务({{unNum}})</view>
 <view wx:if='{{unNum}}'>
-  <van-cell-group>
-    <navigator wx:for='{{app.globalData.dataList}}' wx:for-item="data" wx:key="name"  wx:if="{data.situation==1}}" url="../infor/infor?key={{data.Name}}">{{data.Name}}
-    </navigator>
-  </van-cell-group>
-</view>
-<view class='no-task' wx:else>空空如也</view>
-<view class='show-btn' hover-class='show-btn-hover' bindtap='btn'>{{isShowHistory ? "隐藏历史任务" : "显示历史任务"}}</view>
-<view wx:if="{{isShowHistory}}">
-  <van-cell-group>
-    <view wx:for="{{app.globalData.dataList}}">
-      <view wx:if="{{data.situation==0}}">
-        <navigator url="../infor/infor?key={{data.Name}}">
-          <van-cell icon="passed" title="{{data.Name}}" is-link />
-        </navigator>
-      </view>
+<van-cell-group>
+ <!--<view class="weui-cell__bd" wx:for="{{unDo}}" wx:for-index="key" wx:for-item="data" wx:key="{{data.name}}">{{data.name}}</view>-->
+   <view class="page__bd">
+        <view class="weui-cells weui-cells_after-title">
+          <view wx:for="{{dataList}}" wx:key="keyname"  wx:for-index="key" wx:for-item="value"  >
+             <navigator wx:if="{{value.situation==1}}" url="../infor/infor?keyname={{value.keyname}}"      
+             class="weui-cell weui-cell_access"  hover-class="weui-cell_active">
+               <view  class="weui-cell__bd "> {{value.name}}</view>
+                <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </navigator>
+           </view>
+         </view>
     </view>
-  </van-cell-group>
-</view>
+ </van-cell-group>
+ </view>  
+<view class='no-task' wx:else>空空如也</view>
+<view>
+<button class='show-btn' hover-class='show-btn-hover' bindtap='btn' >{{ShowView ? "隐藏历史任务" : "显示历史任务"}}</button>
+      <navigator class="weui-cell weui-cell_access {{ShowView?'show':'hide'}}" hover-class="weui-cell_active" 
+        wx:for="{{dataList}}" wx:key="keyname" 
+           wx:for-index="key" wx:for-item="value" 
+            wx:if="{{value.situation==0}}" url="../infor/infor?keyname={{value.keyname}}" 
+            >
+           <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+           <view  class="weui-cell__bd">{{value.name}}</view> 
+        </navigator>    
+ </view>   
 <navigator url='/pages/add/add'>
   <image class='add-img' src='../images/add.png'></image>
 </navigator>

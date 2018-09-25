@@ -2,7 +2,6 @@
 const app = getApp();
 
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -15,7 +14,8 @@ Page({
     label: null,
     num: 0,
     dataList: {},
-    temp:null
+    temp:null,
+    keyname:null
   },
 
   /**
@@ -58,10 +58,12 @@ Page({
         "name": this.data.name,
         "infor": this.data.infor,
         "label": this.data.array[this.data.index],
-        "situation": 1
+        "situation": 1,
+        "keyname":'task'+this.data.num,
       }
+      var keyname=temp.keyname;
       //记录下标
-      var index="task"+this.data.num;
+      var index=keyname
       console.log(temp);
       // console.log(temp.keyname);
       // this.dataList=app.globalData.dataList;

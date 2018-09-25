@@ -1,30 +1,30 @@
 //app.js
 App({
   onLaunch: function () {
-    let temp = {};
-    wx.getStorage({
-      key: 'key',
-      success: function (res) {
-        console.log("success");
-        console.log(res.data);
-        // 异步接口在success回调才能拿到返回值
-        temp = res.data;
-        //this.num = this.globalData.dataList.num
-      },
-      fail: function () {
-        console.log('读取key发生错误')
-      }
-
-    })
-    this.globalData.dataList = temp;
-    // console.log(this.globalData);
-
+   let temp={};
+  wx.getStorage({
+    key: 'key',
+    success: function (res) {
+      console.log("success");
+      console.log(res.data);
+      // 异步接口在success回调才能拿到返回值
+     temp= res.data;
+      //this.num = this.globalData.dataList.num
+    },
+    fail: function () {
+      console.log('读取key发生错误')
+    }
+    
+  })
+  this.globalData.dataList = temp;
+ // console.log(this.globalData);
+ 
   },
   onShow: function () {
     var that = this;
     wx.getStorage({
-      key: 'all',
-      success: function (res) {
+        key: 'key',
+        success: function (res) {
         console.log("success")
         console.log(res.data)
         that.globalData.datalist = res.data;
@@ -77,7 +77,8 @@ App({
   globalData: {
     datalist: {},
     num: 0,
-    
+    unNum:0
+	
   },
 
 })
